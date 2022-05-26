@@ -29,12 +29,12 @@
          (and (= x sx) (<= sy y (+ sy ssize -1)))
          (and (= y sy) (<= sx x (+ sx ssize -1))))]))
 
-(define (make-symbolic-ship size height width)
+(define (make-symbolic-ship size mapHeight mapWidth)
   (define-symbolic* x y integer?)
   (assert (>= x 0))
-  (assert (< x width))
+  (assert (< x mapWidth))
   (assert (>= y 0))
-  (assert (< y height))
+  (assert (< y mapHeight))
   (define-symbolic* vertical? boolean?)
   (ship size x y vertical?))
 
@@ -156,12 +156,12 @@
   (define puzzle-soln
     (solve-puzzle #:init-fn fn #:row-sums row-sums #:column-sums col-sums))
 
-  (printf "Place ships as follows: ~a~%~%" (puzzle-ships puzzle-soln))
+  (printf "Place ships as follows: ~a~%~%" (puzzle-ships puzzle-soln));concretized puzzle, puzzle-soln has each symbolic constant replaced by a constant c that solves the constraints 
   (print-puzzle puzzle-soln))
 
 
 ;; Solving the example puzzle
-(define (example-puzzle-fn puzzle)
+#;(define (example-puzzle-fn puzzle)
   ;; Constraints from the ship pieces
   (assert (ref puzzle 5 2))
   (assert (or (and (ref puzzle 5 1) (ref puzzle 5 3)) ;; Vertical
@@ -174,12 +174,12 @@
   ;; Constraints from the water
   (assert (not (ref puzzle 0 0)))
   (assert (not (ref puzzle 2 8))))
-(solve-and-print-puzzle #:init-fn example-puzzle-fn
+#;(solve-and-print-puzzle #:init-fn example-puzzle-fn
                         #:row-sums '(2 3 5 1 1 1 1 0 1 5)
                         #:column-sums '(4 0 3 3 0 3 1 1 4 1))
 
 ;; Solution for the example puzzle
-(define example-puzzle-soln
+#;(define example-puzzle-soln
   (make-puzzle
    (list (ship 4 6 9 #f)
          (ship 3 5 1 #t) (ship 3 8 0 #t)
@@ -188,11 +188,11 @@
    '(2 3 5 1 1 1 1 0 1 5)
    '(4 0 3 3 0 3 1 1 4 1)))
 
-(all-constraints example-puzzle-soln (const #t))
+#;(all-constraints example-puzzle-soln (const #t))
 
 
   
-;; Example puzzle from Microsoft College Puzzle Challenge 2017, Sea Shanties
+; Example puzzle from Microsoft College Puzzle Challenge 2017, Sea Shanties
 (define (cpc-puzzle-fn puzzle)
   ;; Constraints from the ship piece
   (assert (not (ref puzzle 1 2)))
