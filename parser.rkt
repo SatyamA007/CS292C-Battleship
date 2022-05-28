@@ -1,7 +1,7 @@
 (define (readMap puzzleFile rowSum colSum shipsPuzzle constraintsPuzzle)
 
     (define puzzleStr 
-        (file->lines "puzzle-generator/easy/10x10_1.2.3.4.txt"))
+        (file->lines puzzleFile))
     (set-box! rowSum (map string->number (string-split (list-ref puzzleStr 0) " ")))
     (set-box! colSum (map string->number (string-split (list-ref puzzleStr 1) " ")))
     (set-box! shipsPuzzle '())
@@ -30,6 +30,7 @@
       (for  ([i (string->number (substring ln 12))])
         (set-box! shipsPuzzle (append (unbox shipsPuzzle) '(1)))
       )]
+      [(string-prefix? ln "#")(void)]
       [else 
       (cond 
       [(non-empty-string? ln)
@@ -52,6 +53,6 @@
 
 
 
-;(print (map path->string (directory-list "easy")))
+;(print (map path->string (directory-list "puzzle-generator/easy")))
 
 

@@ -1,6 +1,8 @@
 import random
 import os
 
+from sympy import I
+
 class Puzzle:
     
     # grid
@@ -318,11 +320,11 @@ class Puzzle:
         puzzle_size = str(self.m)+'x'+str(self.n)
 
         if self.m*self.n < 10*10:
-            puzzle_path_dir = "easy"
-        elif self.m*self.n < 12*12:
-            puzzle_path_dir = "medium"
+            puzzle_path_dir = "puzzle-generator/easy"
+        elif self.m*self.n < 13*13:
+            puzzle_path_dir = "puzzle-generator/medium"
         else:
-            puzzle_path_dir = "hard"
+            puzzle_path_dir = "puzzle-generator/hard"
 
         final_directory = os.path.join(current_directory, puzzle_path_dir)
         if not os.path.exists(final_directory):
@@ -351,10 +353,10 @@ class Puzzle:
         for i in range(0,self.m):
             for j in range(0,self.n):
                 if self.populated_grid[i][j]!=self.empty and random.random()<0.3 and len(ship_constraints)<=total_ship/3:
-                    ship_constraints.append(str(i)+' '+str(j)+' 1')
+                    ship_constraints.append(str(j)+' '+str(i)+' 1')
                     ship_constraints.append("\n")
                 if self.populated_grid[i][j] ==self.empty and random.random()<0.05 and len(water_constraints)<=total_ship/3:
-                    water_constraints.append(str(i)+' '+str(j)+' 0')
+                    water_constraints.append(str(j)+' '+str(i)+' 0')
                     water_constraints.append("\n")
         
         f.write(''.join(ship_constraints))
@@ -365,4 +367,18 @@ class Puzzle:
                 'cruisers: ' + str(self.cruisers) + '\n' +
                 'destroyers: ' + str(self.destroyers) + '\n' +
                 'submarines: ' + str(self.submarines) + '\n')
+
+        #Finally, show the sample solution
+        f.write("#    ")
+        f.write(''.join(column_totals) + '\n')
+        for i in range(0,self.m):
+            strList = []
+            strList.append(str(self.row_totals[i]))
+            strList.append(" ")
+            for j in range(0,self.n):
+                strList.append(self.populated_grid[i][j])
+                strList.append(" ")
+            f.write("#  ")
+            f.write(''.join(strList) + '\n')
+
         f.close()
