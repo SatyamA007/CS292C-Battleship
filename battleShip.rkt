@@ -10,7 +10,6 @@
 
 (require rosette/lib/angelic)
 
-(require racket/include)
 (include "samplePuzzles.rkt")
 (include "parser.rkt")
 
@@ -170,12 +169,26 @@
   (printf "Place ships as follows: ~a~%~%" (puzzle-ships puzzle-soln));concretized puzzle, puzzle-soln has each symbolic constant replaced by a constant c that solves the constraints 
   (print-puzzle puzzle-soln))
 
-(readMap "asas" row-sum-puzzle col-sum-puzzle ships-puzzle constraints-puzzle)
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; Solving the puzzle ;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; Read and set global values from file
+(readMap "puzzle-generator/medium/10x10_1.2.3.4.txt" row-sum-puzzle col-sum-puzzle ships-puzzle constraints-puzzle)
 (set! ships-puzzle (unbox ships-puzzle))
 (set! row-sum-puzzle (unbox row-sum-puzzle))
 (set! col-sum-puzzle (unbox col-sum-puzzle))
+(set! constraints-puzzle (unbox constraints-puzzle))
 
-(solve-and-print-puzzle #:init-fn cpc-puzzle-fn
+;; Initial constraints supplied from the file
+(define (init-constraints puzzle)
+  (for ([i constraints-puzzle])
+    
+    (assert (eq? (ref puzzle (list-ref i 0) (list-ref i 1)) (list-ref i 2)))
+
+  ))
+
+;; Solve and print the puzzle using angelic non-determinism 
+(solve-and-print-puzzle #:init-fn init-constraints
                         #:row-sums row-sum-puzzle
                         #:column-sums col-sum-puzzle)
                        
