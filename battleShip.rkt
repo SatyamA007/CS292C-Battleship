@@ -124,15 +124,14 @@
 ;; Solving the puzzle ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 (define difficulty-level "puzzle-generator/easy/")
-(time (for ([puzzlePath (in-list (map (lambda (puzzleDirectory) (string-append difficulty-level (path->string puzzleDirectory))) (directory-list difficulty-level)))])
+(for ([puzzlePath (in-list (map (lambda (puzzleDirectory) (string-append difficulty-level (path->string puzzleDirectory))) (directory-list difficulty-level)))])
   (set! row-sum-puzzle (box cpc-row-sum))
   (set! col-sum-puzzle (box cpc-col-sum))
   (set! ships-puzzle (box '(4 3 3 2 2 2 1 1 1 1)))
   (set! constraints-puzzle (box '()))
   
   ;; Read and set global values from file
-  (readMap puzzlePath
-  row-sum-puzzle col-sum-puzzle ships-puzzle constraints-puzzle)
+  (readMap puzzlePath row-sum-puzzle col-sum-puzzle ships-puzzle constraints-puzzle)
   (set! ships-puzzle (unbox ships-puzzle))
   (set! row-sum-puzzle (unbox row-sum-puzzle))
   (set! col-sum-puzzle (unbox col-sum-puzzle))
@@ -140,14 +139,17 @@
 
   ;; Initial constraints supplied from the file
   (define (init-constraints puzzle)
-    (for ([i constraints-puzzle])
-      
-      (assert (eq? (ref puzzle (list-ref i 0) (list-ref i 1)) (list-ref i 2)))
+    (for ([i constraints-puzzle])      
+      (assert (eq? (ref puzzle (list-ref i 0) (list-ref i 1)) (list-ref i 2)))))
 
-    ))
+  (define (fn) 
+    (solve-and-print-puzzle 
+                          #:init-fn init-constraints
+                          #:row-sums row-sum-puzzle
+                          #:column-sums col-sum-puzzle))
 
   ;; Solve and print the puzzle using angelic non-determinism 
-  (solve-and-print-puzzle #:init-fn init-constraints
-                          #:row-sums row-sum-puzzle
-                          #:column-sums col-sum-puzzle)))
-                        
+  ;; save time taken in file
+  (let-values ([(x y z a) (time-apply fn '())])
+    (with-output-to-file (string-append difficulty-level "result") #:mode 'text #:exists 'append
+            (lambda () (printf "\n~a" z)))))
