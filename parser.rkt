@@ -11,9 +11,9 @@
     (set! ln (string-trim ln))
     (cond 
       [(string-prefix? ln "n:")
-      (print (string->number (substring ln 3)))]
+      (void)]
       [(string-prefix? ln "m:")
-      (print (string->number (substring ln 3)))]
+      (void)]
       [(string-prefix? ln "battleships:")
       (for  ([i (string->number (substring ln 13))])
         (set-box! shipsPuzzle (append (unbox shipsPuzzle) '(4)))
@@ -39,20 +39,4 @@
       (set-box! constraintsPuzzle (append (unbox constraintsPuzzle) (list(list (list-ref params 0) (list-ref params 1) isShip ))))
       ])])      
   )
-
-    ; (set! shipsPuzzle (unbox shipsPuzzle))
-    ; (set! rowSum (unbox rowSum))
-    ; (set! colSum (unbox colSum))
-
 )
-
-
-
-
-;(readMap "samplePuzzle" rowSum colSum shipsPuzzle constraintsPuzzle)
-
-
-
-;(print (map path->string (directory-list "puzzle-generator/easy")))
-
-
