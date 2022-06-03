@@ -321,7 +321,7 @@ class Puzzle:
 
         if self.m*self.n < 10*10:
             puzzle_path_dir = "puzzle-generator/easy"
-        elif self.m*self.n < 13*13:
+        elif self.m*self.n < 14*14:
             puzzle_path_dir = "puzzle-generator/medium"
         else:
             puzzle_path_dir = "puzzle-generator/hard"

@@ -123,7 +123,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Solving the puzzle ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
-(define difficulty-level "puzzle-generator/easy/")
+(define difficulty-level "puzzle-generator/hard/")
 (for ([puzzlePath (in-list (map (lambda (puzzleDirectory) (string-append difficulty-level (path->string puzzleDirectory))) (directory-list difficulty-level)))])
   (set! row-sum-puzzle (box cpc-row-sum))
   (set! col-sum-puzzle (box cpc-col-sum))
@@ -151,5 +151,5 @@
   ;; Solve and print the puzzle using angelic non-determinism 
   ;; save time taken in file
   (let-values ([(x y z a) (time-apply fn '())])
-    (with-output-to-file (string-append difficulty-level "result") #:mode 'text #:exists 'append
+    (with-output-to-file (string-append difficulty-level "result.txt") #:mode 'text #:exists 'append
             (lambda () (printf "\n~a" z)))))
