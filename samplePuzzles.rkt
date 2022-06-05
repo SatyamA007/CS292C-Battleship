@@ -1,9 +1,3 @@
-; #lang rosette
-
-; (require rosette/lib/angelic)
-; (require racket/lazy-require)
-; (lazy-require ["battleShip.rkt" (ref)])
-
 ;; Solving the example puzzle
 #;(define (example-puzzle-fn puzzle)
   ;; Constraints from the ship pieces
@@ -36,7 +30,7 @@
 
 
   
-; Example puzzle from Microsoft College Puzzle Challenge 2017, Sea Shanties
+;; Example puzzle from Microsoft College Puzzle Challenge 2017, Sea Shanties
 (define (cpc-puzzle-fn puzzle)
   ;; Constraints from the ship piece
   (assert (not (ref puzzle 1 2)))

@@ -20,8 +20,8 @@
   (define-symbolic* vertical? boolean?)
   (ship size x y vertical?))
 
-;;Print the solved puzzle 
 
+;;Print the solved puzzle 
 (define (print-puzzle puzzle)
   (printf "    ")
   (for ([x (puzzle-width puzzle)])
@@ -41,7 +41,7 @@
     (printf "~a~a" col-sum (if (>= col-sum 10) "" " ")))
   (printf "   ~%~%"))
 
-
+;; Refer values from a 2d vector
 (define (ref puzzle x y [default #f])
   (if (or (< x 0) (>= x (puzzle-width puzzle))
           (< y 0) (>= y (puzzle-height puzzle)))

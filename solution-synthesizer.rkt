@@ -152,4 +152,4 @@
   ;; save time taken in file
   (let-values ([(x y z a) (time-apply fn '())])
     (with-output-to-file (string-append difficulty-level "result.txt") #:mode 'text #:exists 'append
-            (lambda () (printf "\n~a" z)))))
+            (lambda () (printf "~a\n" z)))))

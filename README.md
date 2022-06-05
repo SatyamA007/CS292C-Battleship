@@ -2,9 +2,8 @@
 
 Battleship is a find-the-fleet puzzle based on a grid representing an ocean section with a fleet of ships hidden inside. The goal is to reveal the fleet by logically deducing the location of the ship segment. Such puzzles often appear in puzzle magazines.
 
-Please give it a try. It can be played online at [gamesforthebrain](https://www.gamesforthebrain.com/game/shipfind/)
+Please give the game a try. It can be played online at [gamesforthebrain](https://www.gamesforthebrain.com/game/shipfind/)
 
----
 
 ## The problem
 
@@ -18,7 +17,6 @@ And sometimes, 
 
 > **Rule 3:** A few squares may be revealed to start you off. Revealed squares are fixed and the solution must incorporate these squares as is.
 
----
 
 ## Our Rosette-Aided Solution
 
@@ -31,7 +29,6 @@ And sometimes, 
 5.  **Synthesis:** Using Rosette’s Angelic Execution, search for a binding of symbolic constants to concrete values that satisfies all the assumptions and assertions  
     encountered during and before the call to “solve” query
 
----
 
 ## Result
 
@@ -41,6 +38,6 @@ The average time taken to solve various difficulty level puzzles is given below:
 | --- | --- | --- |
 | Easy | \<10 | 8.04 |
 | Medium | 10-13 | 44.41 |
-| Hard | \>13 | 75.12 |
+| Hard | \>13 | 517.59 |
 
-The specs of the machine running are - Windows 10 PC (Ryzen 7 3750h, 16GB RAM, 1660ti) / **ASUS ROG** Zephyrus **G**
+The specs of the machine running are - Windows 10 PC (Ryzen 7 3750h, 16GB RAM, 1660ti) / **ASUS ROG** Zephyrus **G** 2019
