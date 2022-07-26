@@ -2,8 +2,8 @@
 
 Battleship is a find-the-fleet puzzle based on a grid representing an ocean section with a fleet of ships hidden inside. The goal is to reveal the fleet by logically deducing the location of the ship segment. Such puzzles often appear in puzzle magazines.
 
-Please give the game a try. It can be played online at [gamesforthebrain](https://www.gamesforthebrain.com/game/shipfind/)
-
+Please give the game a try. It can be played online at [gamesforthebrain](https://www.gamesforthebrain.com/game/shipfind/)<br/>
+Find the final project report submission [here](https://drive.google.com/file/d/1LZQqlk8gQbO6t5PxwZPJpKPis9HwTAr-/view?usp=sharing). Perceived difficulty and other aspects are explored in detail and reported.
 
 ## The problem
 
